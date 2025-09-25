@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
+// import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+
 import { cn } from "@/lib/utils"; // make sure path is correct
 
 const DEFAULT_SIZE = 40;
