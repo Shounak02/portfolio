@@ -3,7 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+
   "scripts": {
+  "preinstall": "npm install --legacy-peer-deps",
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
