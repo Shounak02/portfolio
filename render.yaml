@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: portfolio-v5
-    env: node
-    region: oregon # change to your preferred region
-    branch: main
-    buildCommand: npm install --legacy-peer-deps && npm run build
-    startCommand: npm run preview
-    plan: free
