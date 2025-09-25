@@ -3,14 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
   "scripts": {
-  "preinstall": "npm install --legacy-peer-deps",
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "dev": "vite",
-    "build": "vite build",
+    "build:vite": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -41,8 +38,8 @@
     "headlessui": "^0.0.0",
     "lucide-react": "^0.454.0",
     "motion": "^12.23.19",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-intersection-observer": "^9.13.1",
     "react-router-dom": "^6.28.0",
     "react-swipeable-views": "^0.14.0",
@@ -56,8 +53,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^17.0.52",
+    "@types/react-dom": "^17.0.17",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.13.0",
