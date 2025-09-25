@@ -1,83 +1,141 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+import { Dock, DockIcon } from "../components/Dock";
+import { HomeIcon, MailIcon, GithubIcon, LinkedinIcon } from "lucide-react";
+
 import "./index.css";
+
+// Pages
 import Home from "./Pages/Home";
 import About from "./Pages/About";
-import AnimatedBackground from "./components/Background";
-import Navbar from "./components/Navbar";
 import Portofolio from "./Pages/Portofolio";
 import ContactPage from "./Pages/Contact";
-import ProjectDetails from "./components/ProjectDetail";
 import WelcomeScreen from "./Pages/WelcomeScreen";
-import { AnimatePresence } from 'framer-motion';
-import notfound from "./Pages/404";
 import NotFoundPage from "./Pages/404";
+import ProjectDetails from "./components/ProjectDetail";
 
-const LandingPage = ({ showWelcome, setShowWelcome }) => {
+// Components
+import Navbar from "./components/Navbar";
+import AnimatedBackground from "./components/Background";
+import Professional from "./components/Professional";
+
+// ---------- Footer ----------
+const Footer = () => (
+  <footer>
+    <center>
+      <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6" />
+      <span className="block text-sm pb-4 text-gray-500 dark:text-gray-400">
+        © 2025{" "}
+        <a href="https://flowbite.com/" className="hover:underline">
+          Shounak™
+        </a>
+        . All Rights Reserved.
+      </span>
+    </center>
+  </footer>
+);
+
+// ---------- Global Dock Component ----------
+const GlobalDock = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {showWelcome && (
-          <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
-        )}
-      </AnimatePresence>
+    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+      <Dock iconSize={50} iconMagnification={80} iconDistance={120}>
+        <DockIcon
+          onClick={() => {
+            const homeSection = document.getElementById("Home");
+            if (homeSection) {
+              homeSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          <HomeIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
+        </DockIcon>
 
-      {!showWelcome && (
-        <>
-          <Navbar />
-          <AnimatedBackground />
-          <Home />
-          <About />
-          <Portofolio />
-          <ContactPage />
-          <footer>
-            <center>
-              <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
-              <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
-                © 2025{" "}
-                <a href="https://flowbite.com/" className="hover:underline">
-                  EkiZR™
-                </a>
-                . All Rights Reserved.
-              </span>
-            </center>
-          </footer>
-        </>
-      )}
-    </>
+        <DockIcon
+          onClick={() => {
+            const contactSection = document.getElementById("Contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          <MailIcon className="w-6 h-6 text-white hover:text-red-500 transition-colors duration-200" />
+        </DockIcon>
+
+        <DockIcon href="https://github.com/Shounak02">
+          <GithubIcon className="w-6 h-6 text-white hover:text-black transition-colors duration-200" />
+        </DockIcon>
+
+        <DockIcon href="https://www.linkedin.com/in/shounakmandal/">
+          <LinkedinIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
+        </DockIcon>
+
+      </Dock>
+    </div>
   );
 };
 
-const ProjectPageLayout = () => (
+// ---------- Landing Page ----------
+const LandingPage = ({ showWelcome, setShowWelcome }) => (
   <>
-    <ProjectDetails />
-    <footer>
-      <center>
-        <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
-        <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
-          © 2023{" "}
-          <a href="https://flowbite.com/" className="hover:underline">
-            EkiZR™
-          </a>
-          . All Rights Reserved.
-        </span>
-      </center>
-    </footer>
+    <AnimatePresence mode="wait">
+      {showWelcome && (
+        <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
+      )}
+    </AnimatePresence>
+
+    {!showWelcome && (
+      <>
+        <Navbar />
+        <AnimatedBackground />
+        <Home />
+        <About />
+        <Professional />
+        <Portofolio />
+        <ContactPage />
+        <Footer />
+      </>
+    )}
   </>
 );
 
-function App() {
+// ---------- Project Page Layout ----------
+const ProjectPageLayout = () => (
+  <>
+    <ProjectDetails />
+    <Footer />
+  </>
+);
+
+// ---------- App ----------
+export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage showWelcome={showWelcome} setShowWelcome={setShowWelcome} />} />
-        <Route path="/project/:id" element={<ProjectPageLayout />} />
-         <Route path="*" element={<NotFoundPage />} /> {/* Ini route 404 */}
-      </Routes>
+      <div className="relative min-h-screen">
+        {/* Global Dock is always visible */}
+        <GlobalDock />
+
+        {/* Pages */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LandingPage
+                showWelcome={showWelcome}
+                setShowWelcome={setShowWelcome}
+              />
+            }
+          />
+          <Route path="/project/:id" element={<ProjectPageLayout />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
-
-export default App;
