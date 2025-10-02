@@ -1,7 +1,6 @@
 // App.jsx
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { AnimatePresence } from "framer-motion";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Dock, DockIcon } from "../components/Dock";
@@ -64,44 +63,42 @@ const CVModal = ({ onClose }) => (
 );
 
 // ---------- Global Dock ----------
-const GlobalDock = ({ onShowCV }) => {
-  return (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-      <Dock iconSize={50} iconMagnification={80} iconDistance={120}>
-        <DockIcon
-          onClick={() => {
-            const homeSection = document.getElementById("Home");
-            if (homeSection) homeSection.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
-          <HomeIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
-        </DockIcon>
+const GlobalDock = ({ onShowCV }) => (
+  <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+    <Dock iconSize={50} iconMagnification={80} iconDistance={120}>
+      <DockIcon
+        onClick={() => {
+          const homeSection = document.getElementById("Home");
+          if (homeSection) homeSection.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
+        <HomeIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
+      </DockIcon>
 
-        <DockIcon
-          onClick={() => {
-            const contactSection = document.getElementById("Contact");
-            if (contactSection)
-              contactSection.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
-          <MailIcon className="w-6 h-6 text-white hover:text-red-500 transition-colors duration-200" />
-        </DockIcon>
+      <DockIcon
+        onClick={() => {
+          const contactSection = document.getElementById("Contact");
+          if (contactSection)
+            contactSection.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
+        <MailIcon className="w-6 h-6 text-white hover:text-red-500 transition-colors duration-200" />
+      </DockIcon>
 
-        <DockIcon href="https://github.com/Shounak02">
-          <GithubIcon className="w-6 h-6 text-white hover:text-black transition-colors duration-200" />
-        </DockIcon>
+      <DockIcon href="https://github.com/Shounak02">
+        <GithubIcon className="w-6 h-6 text-white hover:text-black transition-colors duration-200" />
+      </DockIcon>
 
-        <DockIcon href="https://www.linkedin.com/in/shounakmandal/">
-          <LinkedinIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
-        </DockIcon>
+      <DockIcon href="https://www.linkedin.com/in/shounakmandal/">
+        <LinkedinIcon className="w-6 h-6 text-white hover:text-blue-500 transition-colors duration-200" />
+      </DockIcon>
 
-        <DockIcon onClick={onShowCV}>
-          <FileTextIcon className="w-6 h-6 text-white hover:text-green-400 transition-colors duration-200" />
-        </DockIcon>
-      </Dock>
-    </div>
-  );
-};
+      <DockIcon onClick={onShowCV}>
+        <FileTextIcon className="w-6 h-6 text-white hover:text-green-400 transition-colors duration-200" />
+      </DockIcon>
+    </Dock>
+  </div>
+);
 
 // ---------- Landing Page ----------
 const LandingPage = ({ showWelcome, setShowWelcome }) => (
@@ -115,6 +112,7 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => (
     {!showWelcome && (
       <>
         <AnimatedBackground />
+        
         <Home />
         <About />
         <Professional />
@@ -135,68 +133,61 @@ const ProjectPageLayout = () => (
 );
 
 // ---------- App ----------
-
 export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
   const [showCV, setShowCV] = useState(false);
 
   return (
     <BrowserRouter>
-  <div className="relative min-h-screen">
-    {showCV && <CVModal onClose={() => setShowCV(false)} />}
+      <div className="relative min-h-screen">
+        {/* CV Modal */}
+        {showCV && <CVModal onClose={() => setShowCV(false)} />}
 
-    {/* Render Navbar and Dock only after welcome screen */}
-    {!showWelcome && (
-      <>
-        <Navbar onShowCV={() => setShowCV(true)} />
-        <GlobalDock onShowCV={() => setShowCV(true)} />
-      </>
-    )}
+        {/* Navbar & Dock only after welcome */}
+        {!showWelcome && (
+          <>
+            <Navbar onShowCV={() => setShowCV(true)} />
+            <GlobalDock onShowCV={() => setShowCV(true)} />
+          </>
+        )}
 
-    <AnimatePresence mode="wait">
-      <Routes>
-        {/* Landing Page */}
-        <Route
-          path="/"
-          element={
-            <motion.div
-              key="landing"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <LandingPage
-                showWelcome={showWelcome}
-                setShowWelcome={setShowWelcome}
-              />
-            </motion.div>
-          }
-        />
-
-        {/* Project Details Page */}
-        <Route
-          path="/project/:id"
-          element={
-            <motion.div
-              key="project"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <ProjectPageLayout />
-            </motion.div>
-          }
-        />
-
-        {/* 404 */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </AnimatePresence>
-  </div>
-</BrowserRouter>
-
-
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <motion.div
+                  key="landing"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <LandingPage
+                    showWelcome={showWelcome}
+                    setShowWelcome={setShowWelcome}
+                  />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/project/:id"
+              element={
+                <motion.div
+                  key="project"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <ProjectPageLayout />
+                </motion.div>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+    </BrowserRouter>
   );
 }

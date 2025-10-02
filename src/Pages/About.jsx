@@ -159,7 +159,8 @@ const AboutPage = () => {
     {
       icon: Code,
       color: "from-[#6366f1] to-[#a855f7]",
-      value: totalProjects,
+      value: 12,
+      // value: totalProjects,
       label: "Total Projects",
       description: "Innovative web solutions crafted",
       animation: "fade-right",
@@ -167,7 +168,8 @@ const AboutPage = () => {
     {
       icon: Award,
       color: "from-[#a855f7] to-[#6366f1]",
-      value: totalCertificates,
+      value: 24,
+      // value: totalCertificates,
       label: "Certificates",
       description: "Professional skills validated",
       animation: "fade-up",
@@ -175,7 +177,8 @@ const AboutPage = () => {
     {
       icon: Globe,
       color: "from-[#6366f1] to-[#a855f7]",
-      value: YearExperience,
+      value: 3,
+      // value: YearExperience,
       label: "Years of Experience",
       description: "Continuous learning journey",
       animation: "fade-left",

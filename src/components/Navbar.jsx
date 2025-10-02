@@ -112,15 +112,20 @@ const Navbar = ({ onShowCV }) => {
               </a>
             ))}
 
-            {/* Desktop Preview CV Button */}
-            <button
+            {/* Desktop Preview CV Button */}          
+            <a
               onClick={onShowCV}
-              className="flex items-center gap-2 px-3 py-2 rounded-md bg-white/20 backdrop-blur-md hover:bg-white/30 text-white transition"
+              className="relative px-1 py-2 text-sm font-medium group flex items-center gap-1 cursor-pointer"
             >
-              <FileTextIcon className="w-5 h-5" />
-              Preview CV
-            </button>
-          </div>
+              <span className="relative z-10 transition-colors duration-300 text-[#e2d3fd] group-hover:text-white flex items-center gap-1">
+                
+                Resume
+                <FileTextIcon className="w-4 h-4" />
+              </span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100" />
+            </a>
+
+          </div>  
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -164,16 +169,19 @@ const Navbar = ({ onShowCV }) => {
           ))}
 
           {/* Mobile Preview CV Button */}
-          <button
-            onClick={() => {
-              onShowCV();
-              setIsOpen(false);
+          <a
+            onClick={(e) => { e.preventDefault(); onShowCV(); setIsOpen(false); }}
+            className={`block px-4 py-3 text-lg font-medium transition-all duration-300 ease text-[#e2d3fd] hover:text-white flex items-center gap-2`}
+            style={{
+              transitionDelay: `${navItems.length * 100}ms`,
+              transform: isOpen ? "translateX(0)" : "translateX(50px)",
+              opacity: isOpen ? 1 : 0,
             }}
-            className="flex items-center gap-2 px-4 py-3 rounded-md bg-white/20 backdrop-blur-md hover:bg-white/30 text-white w-full transition"
           >
+            Resume
             <FileTextIcon className="w-5 h-5" />
-            Preview CV
-          </button>
+          </a>
+
         </div>
       </div>
     </nav>

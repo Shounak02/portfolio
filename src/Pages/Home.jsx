@@ -4,6 +4,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
+
+
 // Memoized Components
 const StatusBadge = memo(() => (
   <div className="inline-block animate-float lg:mx-0 pt-10" data-aos="zoom-in" data-aos-delay="400">
@@ -13,6 +15,9 @@ const StatusBadge = memo(() => (
         <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-medium flex items-center">
           <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-blue-400" />
           Ready to Innovate
+          {/* <CoolMode>
+        <Button>Click Me!</Button>
+      </CoolMode> */}
         </span>
       </div>
     </div>
@@ -178,6 +183,8 @@ const Home = () => {
                   </span>
                   <span className="w-[3px] h-6 bg-gradient-to-t from-[#6366f1] to-[#a855f7] ml-1 animate-blink"></span>
                 </div>
+
+                
 
                 {/* Description */}
                 <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"

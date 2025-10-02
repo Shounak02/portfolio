@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react"
 
 const AnimatedBackground = () => {
@@ -65,4 +66,7 @@ const AnimatedBackground = () => {
 }
 
 export default AnimatedBackground
+
+
+
 

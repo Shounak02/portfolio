@@ -114,7 +114,7 @@ const techStacks = [
   { icon: "firebase.svg", language: "Firebase" },
   { icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/express.svg", language: "Express" },
   { icon: "vercel.svg", language: "Vercel" },
-  { icon: "public/docker-svgrepo-com.svg", language: "Docker" },
+  { icon: "docker.svg", language: "Docker" },
   { icon: "aws-svgrepo-com.svg", language: "AWS" },
   { icon: "netlify-svgrepo-com.svg", language: "Netlify" },
   { icon: "github-color-svgrepo-com.svg", language: "GitHub" }
